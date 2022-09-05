@@ -1,103 +1,129 @@
-var mouseEvent = "empty";
-var last_position_of_x, last_position_of_y;
 
-    canvas = document.getElementById('myCanvas');
-    ctx = canvas.getContext("2d");
-    
-    color = "black";
-    width_of_line = 1;
+var canvas = new fabric.Canvas('myCanvas');
 
-    canvas.addEventListener("mousedown", my_mousedown);
-    
-    function my_mousedown(e)
-    {
-        //Addictonal Activity start
-        color = document.getElementById("color").value;
-        width_of_line = document.getElementById("width_of_line").value;
-        //Addictonal Activity ends
+ball_y=0;
+ball_x=0;
+hole_y=400;
+hole_x=800;
 
-        mouseEvent = "mouseDown";
-    }
 
-    canvas.addEventListener("mousemove", my_mousemove);
-    function my_mousemove(e)
-    {
-        current_position_of_mouse_x = e.clientX - canvas.offsetLeft;
-        current_position_of_mouse_y = e.clientY - canvas.offsetTop;
+block_image_width = 5;
+block_image_height = 5;
 
-        if (mouseEvent == "mouseDown") {
-        ctx.beginPath();
-        ctx.strokeStyle = color;
-        ctx.lineWidth = width_of_line;
-        ctx.moveTo(last_position_of_x, last_position_of_y);
-        ctx.lineTo(current_position_of_mouse_x, current_position_of_mouse_y);        
-        ctx.stroke();
-        }
-
-        last_position_of_x = current_position_of_mouse_x; 
-        last_position_of_y = current_position_of_mouse_y;
-
-    }
-
-    canvas.addEventListener("mouseup", my_mouseup);
-    function my_mouseup(e)
-    {
-        mouseEvent = "mouseUP";
-    }
-
-    canvas.addEventListener("mouseleave", my_mouseleave);
-    function my_mouseleave(e)
-    {
-        mouseEvent = "mouseleave";
-    }
-
-var last_position_of_touch_x, last_position_of_touch_y;
-var width = screen.width;
-
-new_width = screen.width - 70;
-new_height = screen.height - 300;
-
-if(width < 992)
-{
-    document.getElementById("myCanvas").width = new_width;
-    document.getElementById("myCanvas").height = new_height;
-    document.body.style.overflow = "hidden";
+function load_img () {}
+	fabric.Image.fromURL("golf-h.png, function"), function(Img) {
+		hole_obj = Img;
+		hole_obj.scaleToWidth(50);
+		hole_obj.scaleToWidth(50);
+		hole_obj.set({
+			top:hole_y,
+			left:top_x,
+		});
+		canvas.add(hole_obj);
+	
+	new_image();
 }
 
-canvas.addEventListener("touchstart", my_touchstart);
-
-function my_touchstart(e) 
+function new_image()
 {
-    console.log("my_touchstart");
-    //Additional Activity
-    color = document.getElementById("color").value;
-    width_of_line = document.getElementById("width_of_line").value;
-    //End Additional Activity
-         
-    last_position_of_touch_x = e.touches[0].clientX - canvas.offsetLeft;
-    last_position_of_touch_y = e.touches[0].clientY - canvas.offsetTop;
+	
+fabric.Image.fromURL("ball.png"), function(Img);
+	ball_obj = Img;
+	ball_obj.scaleToWidth(50);
+	ball_obj.scaleToHeight(50);
+	ball_obj.set({
+	top:ball_y,
+	left:ball_x
+	});
+	canvas.add(ball_obj);
 }
 
-canvas.addEventListener("touchmove", my_touchmove);
 
-function my_touchmove(e) 
+window.addEventListener("keydown", my_keydown);
+
+function my_keydown(e)
 {
-    current_position_of_touch_x = e.touches[0].clientX - canvas.offsetLeft;
-    current_position_of_touch_y = e.touches[0].clientY - canvas.offsetTop;
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = width_of_line;
-    ctx.moveTo(last_position_of_touch_x, last_position_of_touch_y);
-    ctx.lineTo(current_position_of_touch_x, current_position_of_touch_y)
-    ctx.stroke();
+	keyPressed = e.keyCode;
+	console.log(keyPressed);
+	if((ball_x==hole_x)&&(ball_y==hole_y)){
+		canvas.remove(ball_obj);
+		console.log("You have Hit the Goal!!!");
+		document.getElementById("hd3").innerHTML="You have Hit the Goal!!!";
+	    document.getElementById("myCanvas").style.borderColor="red";
+	}
+	
+	else{
+		if(keyPressed == '38')
+		{
+			up();
+			console.log("up");
+		}
+		if(keyPressed == '40')
+		{
+			down();
+			console.log("down");
+		}
+		if(keyPressed == '37')
+		{
+			left();
+			console.log("left");
+		}
+		if(keyPressed == '39')
+		{
+			right();
+			console.log("right");
+		}
+	}
+	
+	function up()
+	{
+		if(ball_y >=5)
+		{
+			ball_y = ball_y - block_image_height;
+			console.log("block image height = " + block_image_height);
+			console.log("When Up arrow key is pressed, X =  " + ball_x + " , Y = "+ball_y);
+			canvas.remove(ball_obj);
+	    }	new_image();
+	}
 
-    last_position_of_touch_x = current_position_of_touch_x; 
-    last_position_of_touch_y = current_position_of_touch_y;
-   
+	function down()
+	{
+		if(ball_y <=450)
+		{
+			ball_y = ball_y + block_image_height;
+			console.log("block image height = " + block_image_height);
+			console.log("When Down arrow key is pressed, X =  " + ball_x + " , Y = "+ball_y);
+			canvas.remove(ball_obj);
+			new_image();
+		}
+
+	}
+
+	function left()
+	{
+		if(ball_x >5)
+		{
+			ball_x = ball_x - block_image_width;
+			console.log("block image width = " + block_image_width);
+			console.log("When Left arrow key is pressed, X =  " + ball_x + " , Y = "+ball_y);
+			canvas.remove(ball_obj);
+			new_image();
+		}
+		
+	}
+
+	function right()
+	{
+		if(ball_x <=1050)
+		{
+			ball_x = ball_x + block_image_width;
+			console.log("block image width = " + block_image_width);
+			console.log("When Right arrow key is pressed, X =  " + ball_x + " , Y = "+ball_y);
+			canvas.remove(ball_obj);
+			new_image();
+		
+		}
+	}
+	
 }
 
-//Additional Activity
-function clearArea()
-{
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-}
