@@ -1,81 +1,73 @@
+var mouseEvent = "empty";
 
-// Create canvas variable
+    canvas = document.getElementById('myCanvas');
+    ctx = canvas.getContext("2d");
+    
+    color = "black";
+    width_of_line = 2;
 
-//Set initial positions for ball and hole images.
+    /*Uncomment the correct line*/
+    //canvas.addEventListener("mousedown", my_mousedown);
+    //canvas.setEventListener("mousedown", my_mousedown);
+    //canvas.getEventListener("mousedown", my_mousedown);
 
+    function my_mousedown(e)
+    {
+        color = document.getElementById("color").value;
+        width_of_line = document.getElementById("width_of_line").value;
+        radius = document.getElementById("radius").value;
+        mouseEvent = "mouseDown";
+    }
 
-block_image_width = 5;
-block_image_height = 5;
+    /*
+    Create an event listener for "mousemove"
+    and call function my_mousemove
+    */
 
-function load_img(){
-	// write code to Upload golf image on the canvas
-	new_image();
+    function my_mousemove(e)
+    {
+        /*Uncomment the correct line*/
+        //current_position_of_mouse_x = e.clientX - canvas.offsetLeft;
+        //current_position_of_mouse_x = e.clientX - canvas.offsetRight;
+        //current_position_of_mouse_x = e.clientX - canvas.offsetBottom;
+
+        /*
+        create current_position_of_mouse_y and
+        assign it e.clientY - canvas.offsetTop;
+        */
+
+        if (mouseEvent == "mouseDown") {
+        console.log("Current position of x and y coordinates = ");
+        console.log("x  = " + current_position_of_mouse_x + "y = " + current_position_of_mouse_y);
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width_of_line;
+        ctx.arc(current_position_of_mouse_x, current_position_of_mouse_y, radius ,0 , 2 * Math.PI);
+        ctx.stroke();
+        }
+
+    }
+
+    /*Create an event listener for "mouseup"
+    and call function my_mouseup
+
+    Create a function named my_mouseup with
+    event e as parameter.
+    
+    Assign "mouseUP" to mouseEvent
+    within the function
+    */
+    
+    /*Create an event listener for "mouseleave"
+    and call function my_mouseleave
+
+    Create a function named my_mouseleave with
+    event e as parameter.
+    
+    Assign "mouseleave" to mouseEvent
+    within the function
+    */
+
+function clearArea() {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
-
-function new_image()
-{
-	// write code to Upload ball image on canvas
-}
-
-window.addEventListener("keydown", my_keydown);
-
-function my_keydown(e)
-{
-	keyPressed = e.keyCode;
-	console.log(keyPressed);
-	/* Check the coordinates of the ball and hole images to finish the game. 
-	And id coordinates matches them remove ball image, 
-	display "GAME OVER!!!" 
-	and make canvas border 'red'. */
-	
-	else{
-		if(keyPressed == '38')
-		{
-			up();
-			console.log("up");
-		}
-		if(keyPressed == '40')
-		{
-			down();
-			console.log("down");
-		}
-		if(keyPressed == '37')
-		{
-			left();
-			console.log("left");
-		}
-		if(keyPressed == '39')
-		{
-			right();
-			console.log("right");
-		}
-	}
-	
-	function up()
-	{
-		// Write a code to move ball upward.
-	}
-
-	function down()
-	{
-		 // Write a code to move ball downward.
-	}
-
-	function left()
-	{
-		if(ball_x >5)
-		{
-			// Write a code to move ball left side.
-		}
-	}
-
-	function right()
-	{
-		if(ball_x <=1050)
-		{
-			// Write a code to move ball right side.
-		}
-	}
-	
-}
-

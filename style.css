@@ -1,21 +1,33 @@
-.body_background 
-{
+.body_backgorund {
+    background-image: url("bg1.png");
     background-position: center;
-    background-size:contain;
-	background:url(Grass.jpg);
-}
-#myCanvas
-{
-    border-width:10px;
-    border-style:ridge;
-	background-color:forestgreen;
-}
+    background-size: cover;
+  }
+  body{
+    cursor: pointer;
+  }
+  h1
+  {
+      color: red; 
+      font-size: 20px;
+  }
+  #myCanvas
+  {
+      border-width:10px;
+      background-color: white; 
+      border-style:ridge;
+  }
 
+  button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 42px;
+    font-size: 16px;
+  }
 
-#hd3{
-	display: inline-block;
-	color: red;
-	background-color: aliceblue;
-	font-family: fantasy;
-}
-
+  input
+  {
+    margin-right: 20px;
+  }
+  
