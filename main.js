@@ -1,69 +1,58 @@
-// Create a variable canvas
+var mouseEvent = "empty";
+
+    canvas = document.getElementById('myCanvas');
+    ctx = canvas.getContext("2d");
+    
+    color = "black";
+    width_of_line = 2;
+
+    
+    canvas.addEventListener("mousedownz", my_mousedown);
+    canvas.addEventListener("mousedownz", my_mousedown);
+    canvas.addEventListener("mousedownz", my_mousedown);
 
 
-block_y=1;
-block_x=1;
+    function my_mousedown(e)
+    {
+        color = document.getElementById("color").value;
+        width_of_line = document.getElementById("width_of_line").value;
+        radius = document.getElementById("radius").value;
+        mouseEvent = "mouseDown";
+    }
 
-block_image_width = 350;
-block_image_height = 480;
+    
 
-var block_image_object= "";
+    function my_mousemove(e)
+    {
+       
+        current_position_of_mouse_x = e.clientX - canvas.offsetLeft;
+        current_position_of_mouse_y = e.clientY - canvas.offsetTop;
 
-// Complete the function new_image() to add new image
-function new_image(get_image)
-{
-	
+        if (mouseEvent == "mouseDown") {
+        console.log("Current position of x and y coordinates = ");
+        console.log("x  = " + current_position_of_mouse_x + "y = " + current_position_of_mouse_y);
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width_of_line;
+        ctx.arc(current_position_of_mouse_x, current_position_of_mouse_y, radius ,0 , 2 * Math.PI);
+        ctx.stroke();
+        }
+
+    }
+
+    canvas.addEventListener("mouseup", my_mouseup);
+    function my_mouseup(e)
+    {
+        mouseEvent = "mouseUP";
+    }
+
+    canvas.addEventListener("mouseleave", my_mouseleave);
+    function my_mouseleave(e)
+    {
+        mouseEvent = "mouseleave";
+    }
 
 
-
-
-
-
-	
-
+function clearArea() {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
-
-window.addEventListener("keydown", my_keydown);
-
-function my_keydown(e)
-{
-keyPressed = e.keyCode;
-console.log(keyPressed);
-	// Use appropriate keycode to add red image
-	if(keyPressed == ) 
-	{
-
-
-
-	}
-	// Use appropriate keycode to add green image
-	if(keyPressed == )
-	{
-	
-
-
-	}
-	// Use appropriate keycode to add yellow image
-	if(keyPressed == )
-	{
-
-		
-
-	}
-	// Use appropriate keycode to add pink image
-	if(keyPressed == )
-	{
-	
-
-
-	}
-	// Use appropriate keycode to add blue image
-	if(keyPressed == )
-	{
-
-
-
-	}
-	
-}
-
