@@ -1,33 +1,22 @@
-.body_backgorund {
-    background-image: url("bg1.png");
-    background-position: center;
-    background-size: cover;
-  }
-  body{
-    cursor: pointer;
-  }
-  h1
-  {
-      color: red; 
-      font-size: 20px;
-  }
-  #myCanvas
-  {
-      border-width:10px;
-      background-color: white; 
-      border-style:ridge;
-  }
+.body_background 
+{
+    background-image:url('backg.jpg');
+    background-position:center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    font-size: 30px;
+}
+#myCanvas
+{
+    border-width:10px;
+    background-color: white; 
+    border-style:ridge;
+}
 
-  button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 42px;
-    font-size: 16px;
-  }
+h3
+{
+	width: 600px;
+	background-color: white;
+	display: inline-block;
+}
 
-  input
-  {
-    margin-right: 20px;
-  }
-  
